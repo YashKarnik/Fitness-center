@@ -1,3 +1,3 @@
 ## IP-MINI-PROJECT
 ### Fitness center
-##Please push to your respective branvches!!
+## Please push to your respective branvches!!
