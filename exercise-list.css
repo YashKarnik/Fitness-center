@@ -10,6 +10,7 @@ nav {
   width: 100%;
   background-color: #c70039;
   position: sticky;
+  top: 0;
 }
 
 nav ul {
@@ -36,15 +37,27 @@ nav ul > li {
 nav ul > li:hover {
   background-color: #f37121;
 }
-#macros-dropdown ul {
+.macros-dropdown ul > li {
+  border-bottom: 1px dashed black;
+}
+.macros-dropdown ul {
   width: 100%;
   display: none;
   padding: 0px;
   position: absolute;
   background-color: #c70039;
 }
-#macros-dropdown:hover ul {
+.macros-dropdown:hover ul {
   display: block;
+}
+
+.macros-dropdown img {
+  height: 15px;
+  transition-duration: 200ms;
+}
+
+.macros-dropdown:hover img {
+  transform: rotate(180deg);
 }
 
 footer {
@@ -62,4 +75,21 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.exercise-list {
+  color: white;
+  margin: 50px;
+}
+
+.exercise-list table {
+  width: 100%;
+}
+
+.exercise-list table tr > td {
+  border: 2px solid white;
+  padding: 30px 50px;
+  width: 50px;
+  cursor: default;
+  text-align: center;
 }
