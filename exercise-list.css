@@ -22,29 +22,29 @@ nav ul {
   justify-items: stretch;
 }
 
-nav ul li {
+nav ul > li {
   font-size: 20px;
   line-height: 50px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  transition-duration: 200ms;
-  padding: 10px;
   font-weight: bolder;
   position: relative;
-}
-nav ul li ul {
-  color: blue;
-  padding: 0px;
-  width: 100%;
-  background-color: green;
-  display: block;
-  position: absolute;
-  grid-template-rows: 1fr 1fr 1fr;
+  transition-duration: 200ms;
 }
 
-nav ul li:hover {
-  background-color: #ff5733;
+nav ul > li:hover {
+  background-color: #f37121;
+}
+#macros-dropdown ul {
+  width: 100%;
+  display: none;
+  padding: 0px;
+  position: absolute;
+  background-color: #c70039;
+}
+#macros-dropdown:hover ul {
+  display: block;
 }
 
 footer {
