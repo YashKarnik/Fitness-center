@@ -49,6 +49,8 @@ body {
 }
 
 .cards-list {
+  width: 100vw;
+  transform: translateX(-10px);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
