@@ -3,124 +3,317 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="products.css" />
+    <link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+			crossorigin="anonymous"
+		/>
+
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+			defer
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+			crossorigin="anonymous"
+			defer
+		></script>
+    <!-- <link rel="stylesheet" href="products.css" /> -->
+    <link rel="stylesheet" href="./static/css/style.css" />
     <title>Products</title>
   </head>
+  <style>
+    .card {
+      margin:1rem auto 1rem auto;
+      padding-top: 10px;
+    }
+    nav {
+      margin-bottom: 1rem;
+    }
+  </style>
   <body>
-    <img src="dumbell.svg" alt="Dumbell.svg" id="background_image" />
-    <div class="cards-list">
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+			<a class="navbar-brand" href="#">
+				<img
+					src="./static/svgs/dumbell.svg"
+					width="40"
+					height="40"
+					alt=""
+					loading="lazy"
+				/>
+			</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarTogglerDemo01"
+				aria-controls="navbarTogglerDemo01"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+				<a class="navbar-brand" href="#"><b>Fitness Center</b></a>
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item ">
+						<a class="nav-link font-weight-bold" href="./mform.html"
+							>Premium membership <span class="sr-only">(current)</span></a
+						>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link font-weight-bold" href="./products.html">Supplements</a>
+					</li>
+					<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <b>Articles</b>
+            </a>
+            <div class="dropdown-menu bg-danger" style="border: none;" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Men</a>
+              <a class="dropdown-item" href="#">Women</a>
+              
+            </div>
+          </li>
+					<li class="nav-item">
+						<a class="nav-link font-weight-bold" id='cart-details' href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link font-weight-bold" href="#">About Us</a>
+					</li>
+					
+					</li>
+				</ul>
+					<a href="./register.html">
+					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
+						Sign In/Sign Up
+					</button>
+				</a>
+			</div>
+    </nav>
+    <img src="./static/favicon/favicon.svg" alt="Dumbell.svg" class="dead-center bg-img" />
+    <div class="container-fluid text-center">
+      <h1 class='text-light py-2 m-4' style="border-bottom: 4px solid white;">Whey Protein</h1>
+      <div class="row ">
+        <div class="col-md-4 mx-auto">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/whey/whey_protien.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Whey protein (Standard)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $100 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#"  class="card-link" data-product-name="Whey protein (Standard)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/whey/whey_protien_isolate.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Whey protein (Isolate)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $200 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Whey protein (Isolate)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/whey/whey_protien_gold.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Whey protein (Gold)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $300 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Whey protein (Gold)">Buy now</a>
+            </div>
+          </div>
+        </div>
+       
+        
       </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
+      <h1 class='text-light py-2 m-4' style="border-bottom: 4px solid white;">Branch Chain Amino Acids(BCAAs)</h1>
+      <div class="row ">
+        <div class="col-md-4 mx-auto">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/bcaa/bcaa_normal.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">BCAA (Standard)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $100 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="BCAA (Standard)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/bcaa/bcaa_pro.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">BCAA (Pro)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $200 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="BCAA (Pro)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/bcaa/bcaa_gold.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">BCAA (Gold)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $300 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="BCAA (Gold)">Buy now</a>
+            </div>
+          </div>
+        </div>
+       
+        
       </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
+      <h1 class='text-light py-2 m-4' style="border-bottom: 4px solid white;">Creatine Monohydrate</h1>
+      <div class="row ">
+        <div class="col-md-4 mx-auto">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_1.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Creatine Monohydrate (Standard)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $100 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Creatine Monohydrate (Standard)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_2.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Creatine Monohydrate (Isolate)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $200 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Creatine Monohydrate (Isolate)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_3.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Creatine Monohydrate (Gold)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $300 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Creatine Monohydrate (Gold)">Buy now</a>
+            </div>
+          </div>
+        </div>
+       
+        
       </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
-      </div>
-      <div class="card">
-        <img
-          src="./products-images/whey_protein.jpg"
-          alt="Product image"
-          class="card-image"
-        />
-        <div class="card-title">Title</div>
+      
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cart Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+           
+            <button type="button" id="cost-details" class="btn btn-dark">$0</button>
+            <button type="button" class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
       </div>
     </div>
   </body>
+  <script>
+    let costDict ={"Whey protein (Standard)":100,
+"Whey protein (Isolate)":200,
+"Whey protein (Gold)":300,
+"BCAA (Standard)":100,
+"BCAA (Pro)":200,
+"BCAA (Gold)":300,
+"Creatine Monohydrate (Standard)":100,
+"Creatine Monohydrate (Isolate)":200,
+"Creatine Monohydrate (Gold)":300}
+    let temp=document.querySelectorAll('.card-link')
+    cart=[]
+    
+    temp.forEach(element=>{
+      element.addEventListener('click',e=>{
+        let item=e.target.getAttribute('data-product-name')
+        // console.log(item)
+        cart.push(item)
+    // console.log(cart)
+    document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
+      })
+    })
+    function updateModalBody(){
+      if(cart.length==0)
+      document.querySelector('.modal-body').innerText="Cart Empty"
+      else 
+      {
+        cost=0
+        cart.forEach(e=>cost+=costDict[e])
+        document.querySelector('.modal-body').innerText=cart.join('\n')
+        document.querySelector('#cost-details').innerText='$'+cost
+        console.log(cost);
+        
+      }
+    
+    }
+  </script>
 </html>
+
