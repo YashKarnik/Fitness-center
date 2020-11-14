@@ -52,7 +52,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="#"><b>Fitness Center</b></a>
+				<a class="navbar-brand" href="./landing.html"><b>Fitness Center</b></a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item ">
 						<a class="nav-link font-weight-bold" href="#"
@@ -96,7 +96,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label for="inputPassword4">Email</label>
-						<input type="email" class="form-control" id="inputPassword4" />
+						<input type="email" class="form-control" id="inputPassword4" required/>
 					</div>
 				</div>
 				<div class="form-group col-md-12 text-center">
@@ -108,7 +108,9 @@
 							type="radio"
 							id="gold"
 							name="tier"
+							value="gold"
 							class="custom-control-input"
+							required
 						/>
 						<label class="custom-control-label" for="gold">Gold</label>
 					</div>
@@ -117,6 +119,7 @@
 							type="radio"
 							id="silver"
 							name="tier"
+							value="silver"
 							class="custom-control-input"
 						/>
 						<label class="custom-control-label" for="silver">Silver</label>
@@ -127,25 +130,56 @@
 							id="bronze"
 							name="tier"
 							class="custom-control-input"
+							value="bronze"
 						/>
 						<label class="custom-control-label" for="bronze">Bronze</label>
 					</div>
 				</div>
+				<div class="form-group col-md-12 text-center">
+					<label  for="membership-duration"><h3 id="membership-duration-label">Set Duration</h3></label>
+					<input type="range" min="1" max="24" value="3" style="width: 100%;margin-bottom: 2rem;" id="membership-duration" required>
+				</div>
 				<div class="form-row">
-					<button type="button" class="btn btn-lg btn-success mx-auto">
+					<button type="button" class="btn btn-lg btn-success mx-auto" data-toggle="modal" data-target="#exampleModal" onclick="updateModal()" >
 						Activate
 					</button>
 				</div>
 			</form>
 		</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Membership Type</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  Membership Duration
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-dark" id="total-cost-bnt" data-dismiss="modal">Total</button>
+				  <button type="button" class="btn btn-primary">Buy now</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
 	</body>
 	<script>
 		let radiobtn = document.getElementsByName('tier');
 		let tierCost = document.getElementById('tier-cost');
+		let membershipDuration = document.getElementById('membership-duration');
+		let totalCostBnt = document.getElementById('total-cost-bnt');
+		let mebershimpDurationLabel = document.getElementById('membership-duration-label');
+		let type=''
+		let dur=0
+		let costdict= {'gold':100,'silver':50,'bronze':25}
 		radiobtn.forEach(element => {
 			element.addEventListener('input', e => {
 				console.log(e.target.id);
 				let x = e.target.id;
+				type=x
 				let cost = 0;
 				if (x == 'gold') cost = 100;
 				else if (x == 'silver') cost = 50;
@@ -155,5 +189,11 @@
 					x.charAt(0).toUpperCase() + x.slice(1) + ` ($${cost}/month)`;
 			});
 		});
+		membershipDuration.addEventListener('input',(e)=>{mebershimpDurationLabel.innerText=e.target.value+' Months';dur=e.target.value})
+		function updateModal() { 
+			document.querySelector('.modal-title').innerText=type?type.toUpperCase():'Select Memebership type'
+			document.querySelector('.modal-body').innerText=dur+' Months'
+			document.querySelector('#total-cost-bnt').innerText=(!isNaN(costdict[type]*dur))?'Total=$'+costdict[type]*dur:'Total=$'+0
+		 }
 	</script>
 </html>

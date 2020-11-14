@@ -90,26 +90,37 @@
 			class="dead-center bg-img"
 			alt="gg"
 		/>
-		<div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
-			<h1 class="text-center">Log In</h1>
-			<form method="POST" action="/lll">
-				<div class="form-row">
-					<div class="form-group col-md-12">
-						<label for="inputPassword4">Email</label>
-						<input type="email" class="form-control" id="inputPassword4" required/>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-12">
-						<label for="inputPassword4"> Password</label>
-						<input type="password" class="form-control" id="inputPassword4" required/>
-					</div>
-					<button type="submit" class="btn btn-lg btn-primary mx-auto">
-						Log in
-					</button>
-				</div>
-			</form>
-			<a href="register.html" class="text-light">Not a user ? Sign up here</a>
-		</div>
+	<div class="container mt-5 rounded-lg">
+        <h2 class="text-white text-center" id='table-label'></h2>
+        <table class="table text-white text-center bg-dark ">
+            <thead  class='thread-dark' >
+              <tr>
+                  <th scope="col">Exercise</th>
+                  <th scope="col">Reps &times; Sets</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+            
+            </tbody>
+          </table>
+    </div>
 	</body>
+	<script>
+        let d = new Date
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let date=d.getDate()
+        let month=d.getMonth()
+        let year=d.getFullYear()
+        let day = days[d.getDay()]
+        document.querySelector('#table-label').innerText=`Today's workout ${day}-${date}/${month}/${year}`
+		
+	</script>
 </html>
