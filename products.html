@@ -58,7 +58,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="#"><b>Fitness Center</b></a>
+				<a class="navbar-brand" href="./landing.html"><b>Fitness Center</b></a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item ">
 						<a class="nav-link font-weight-bold" href="./mform.html"
@@ -66,7 +66,7 @@
 						>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link font-weight-bold" href="./products.html">Supplements</a>
+						<a class="nav-link font-weight-bold" href="#">Supplements</a>
 					</li>
 					<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -255,6 +255,59 @@
        
         
       </div>
+      <h1 class='text-light py-2 m-4' style="border-bottom: 4px solid white;">Mass Gainers</h1>
+      <div class="row ">
+        <div class="col-md-4 mx-auto">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_1.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Mass Gainers (Standard)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $100 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Mass Gainers (Standard)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_2.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Mass Gainers (Isolate)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $200 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Mass Gainers (Isolate)">Buy now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_3.jpg" alt="Card image cap">
+            
+            <div class="card-body">
+              <h5 class="card-title">Mass Gainers (Gold)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">2kgs | $300 </li>
+           
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link" data-product-name="Mass Gainers (Gold)">Buy now</a>
+            </div>
+          </div>
+        </div>
+       
+        
+      </div>
       
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -287,29 +340,36 @@
 "BCAA (Gold)":300,
 "Creatine Monohydrate (Standard)":100,
 "Creatine Monohydrate (Isolate)":200,
-"Creatine Monohydrate (Gold)":300}
+"Creatine Monohydrate (Gold)":300,
+"Mass Gainers (Standard)":100,
+"Mass Gainers (Isolate)":200,
+"Mass Gainers (Gold)":300
+}
     let temp=document.querySelectorAll('.card-link')
     cart=[]
     
     temp.forEach(element=>{
       element.addEventListener('click',e=>{
         let item=e.target.getAttribute('data-product-name')
-        // console.log(item)
         cart.push(item)
-    // console.log(cart)
     document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
       })
     })
+    function removeEle(param) {cart.splice(cart.indexOf(param), 1) ; updateModalBody() ;}
+    // cart=cart.filter(e=>e!=param)
     function updateModalBody(){
       if(cart.length==0)
       document.querySelector('.modal-body').innerText="Cart Empty"
       else 
       {
         cost=0
-        cart.forEach(e=>cost+=costDict[e])
-        document.querySelector('.modal-body').innerText=cart.join('\n')
-        document.querySelector('#cost-details').innerText='$'+cost
-        console.log(cost);
+        htmlstr=''
+        cart.forEach(e=>{
+          cost+=costDict[e]
+          htmlstr+=`<p class='m-0 p-0'>${e} @ $${costDict[e]}<button onclick='removeEle("${e}")' data-element-name='${e}'class='close float-right remove-element-btn'>&times;</button></p></br>`
+        })
+        document.querySelector('.modal-body').innerHTML=htmlstr
+        document.querySelector('#cost-details').innerText='Total=$'+cost
         
       }
     
