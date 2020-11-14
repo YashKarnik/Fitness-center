@@ -1,95 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<title>Premium Membership</title>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-			crossorigin="anonymous"
-		/>
 
-		<script
-			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-			crossorigin="anonymous"
-			defer
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-			crossorigin="anonymous"
-			defer
-		></script>
-		<link rel="stylesheet" href="./static/css/style.css" />
-	</head>
-
+	<?php include('./include/header.php') ?>
 	<body >
-		<nav class="navbar navbar-expand-lg navbar-light bg-danger">
-			<a class="navbar-brand" href="#">
-				<img
-					src="./static/svgs/dumbell.svg"
-					width="40"
-					height="40"
-					alt=""
-					loading="lazy"
-				/>
-			</a>
-			<button
-				class="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarTogglerDemo01"
-				aria-controls="navbarTogglerDemo01"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="./landing.html"><b>Fitness Center</b></a>
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item ">
-						<a class="nav-link font-weight-bold" href="#"
-							>Premium membership <span class="sr-only">(current)</span></a
-						>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link font-weight-bold" href="./products.html">Supplements</a>
-					</li>
-					<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <b>Articles</b>
-            </a>
-            <div class="dropdown-menu bg-danger" style="border: none;" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Men</a>
-              <a class="dropdown-item" href="#">Women</a>
-              
-            </div>
-          </li>
-					<li class="nav-item">
-						<a class="nav-link font-weight-bold" href="#">About Us</a>
-					</li>
-					
-					</li>
-				</ul>
-					<a href="./register.html">
-					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
-						Sign In/Sign Up
-					</button>
-				</a>
-			</div>
-    </nav>
-		<img
-			src="./static/favicon/favicon.svg"
-			class="dead-center bg-img"
-			alt="gg"
-		/>
+		<?php include('./include/navbar.php') ?>
 		<div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
 			<h1 class="text-center">Premium Membership</h1>
 			<form method="POST" action="/lll">
@@ -140,22 +54,22 @@
 					<input type="range" min="1" max="24" value="3" style="width: 100%;margin-bottom: 2rem;" id="membership-duration" required>
 				</div>
 				<div class="form-row">
-					<button type="button" class="btn btn-lg btn-success mx-auto" data-toggle="modal" data-target="#exampleModal" onclick="updateModal()" >
+					<button type="button" class="btn btn-lg btn-success mx-auto" data-toggle="modal" data-target="#premiumMembershipModal" onclick="updatePremiumMembershipModal()" >
 						Activate
 					</button>
 				</div>
 			</form>
 		</div>
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="premiumMembershipModal" tabindex="-1" aria-labelledby="premiumMembershipModal" aria-hidden="true">
 			<div class="modal-dialog">
 			  <div class="modal-content">
 				<div class="modal-header">
-				  <h5 class="modal-title" id="exampleModalLabel">Membership Type</h5>
+				  <h5 class="modal-title-mem" id="exampleModalLabel">Membership Type</h5>
 				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				  </button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id='modal-body-mem'>
 				  Membership Duration
 				</div>
 				<div class="modal-footer">
@@ -165,6 +79,7 @@
 			  </div>
 			</div>
 		  </div>
+		  <?php include('./include/footer.php') ?>
 	</body>
 	<script>
 		let radiobtn = document.getElementsByName('tier');
@@ -190,9 +105,9 @@
 			});
 		});
 		membershipDuration.addEventListener('input',(e)=>{mebershimpDurationLabel.innerText=e.target.value+' Months';dur=e.target.value})
-		function updateModal() { 
-			document.querySelector('.modal-title').innerText=type?type.toUpperCase():'Select Memebership type'
-			document.querySelector('.modal-body').innerText=dur+' Months'
+		function updatePremiumMembershipModal() { 
+			document.querySelector('.modal-title-mem').innerText=type?`TIER: ${type.toUpperCase()}`:'Select Memebership type'
+			document.querySelector('#modal-body-mem').innerText=`DURATION: ${dur} Monthts`
 			document.querySelector('#total-cost-bnt').innerText=(!isNaN(costdict[type]*dur))?'Total=$'+costdict[type]*dur:'Total=$'+0
 		 }
 	</script>

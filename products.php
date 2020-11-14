@@ -1,30 +1,15 @@
+<?php 
+if(isset($_POST['logout-btn'])) {
+	session_start();
+	header('Locaton:./landing.html');
+	session_destroy();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-			crossorigin="anonymous"
-		/>
-
-		<script
-			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-			crossorigin="anonymous"
-			defer
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-			crossorigin="anonymous"
-			defer
-		></script>
-    <link rel="stylesheet" href="./static/css/style.css" />
-    <title>Products</title>
-  </head>
+  
+  <?php include('./include/header.php') ?>
   <style>
     .card {
       margin:1rem auto 1rem auto;
@@ -57,10 +42,10 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="./landing.html"><b>Fitness Center</b></a>
+				<a class="navbar-brand" href="./landing.php"><b>Fitness Center</b></a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item ">
-						<a class="nav-link font-weight-bold" href="./mform.html"
+						<a class="nav-link font-weight-bold" href="./mform.php"
 							>Premium membership <span class="sr-only">(current)</span></a
 						>
 					</li>
@@ -77,6 +62,13 @@
               
             </div>
           </li>
+          
+          <?php session_start()?> 
+				<?php if(isset($_SESSION['username'])):?>
+					<li class="nav-item">
+						<a class="nav-link font-weight-bold" href="./exercise-list.php">Todays Workout</a>
+					</li>
+					<?php endif ?>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold" id='cart-details' href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart</a>
 					</li>
@@ -86,14 +78,26 @@
 					
 					</li>
 				</ul>
-					<a href="./register.html">
-					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
+        <?php if(isset($_SESSION['username'])):?>
+          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+					<button class="btn-dark my-2 my-sm-0 btn-lg">
+            <?php echo '@'.$_SESSION['username']?>
+          </button>	
+        </form>
+					<?php else: ?>
+            <a href="./register.php">
+					<button class="btn-dark my-2 my-sm-0 btn-lg">
 						Sign In/Sign Up
 					</button>
 				</a>
+					<?php endif ?>
 			</div>
     </nav>
     <img src="./static/favicon/favicon.svg" alt="Dumbell.svg" class="dead-center bg-img" />
+    
+
+
+    
     <div class="container-fluid text-center">
       <h1 class='text-light py-2 m-4' style="border-bottom: 4px solid white;">Whey Protein</h1>
       <div class="row ">
@@ -329,6 +333,7 @@
         </div>
       </div>
     </div>
+    <?php include('./include/footer.php') ?>
   </body>
   <script>
     let costDict ={"Whey protein (Standard)":100,
@@ -345,13 +350,15 @@
 "Mass Gainers (Gold)":300
 }
     let temp=document.querySelectorAll('.card-link')
-    cart=[]
-    
+    cart=localStorage.getItem('cart')?localStorage.getItem('cart').split(','):[]
+    document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
     temp.forEach(element=>{
       element.addEventListener('click',e=>{
         let item=e.target.getAttribute('data-product-name')
         cart.push(item)
-    document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
+        localStorage.setItem('cart',cart.toString())
+        console.log(cart);
+        document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
       })
     })
     function removeEle(param) {cart.splice(cart.indexOf(param), 1) ; updateModalBody() ;}
@@ -367,6 +374,7 @@
           cost+=costDict[e]
           htmlstr+=`<p class='m-0 p-0'>${e} @ $${costDict[e]}<button onclick='removeEle("${e}")' data-element-name='${e}'class='close float-right remove-element-btn'>&times;</button></p></br>`
         })
+        localStorage.setItem('cart',cart.toString()) 
         document.querySelector('.modal-body').innerHTML=htmlstr
         document.querySelector('#cost-details').innerText='Total=$'+cost
         
