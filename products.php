@@ -1,10 +1,27 @@
 <?php 
+require './config/db_connect.php';
+
 if(isset($_POST['logout-btn'])) {
 	session_start();
     setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
     header("Refresh:0;url=landing.php");
 	session_destroy();
 }
+
+if(isset($_COOKIE['username'])) {
+	$temp=$_COOKIE['username'];
+	$query="SELECT email FROM user_details WHERE username='{$temp}'";
+	$result=mysqli_query($conn,$query);
+	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
+	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+	$result=mysqli_query($conn,$query);
+	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
+	$tierhtml='';
+	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
+	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
+	else if($tier=="B") $tierhtml='	<img src="./static/svgs/bronze-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
+}
+
 
 
 ?>
@@ -83,6 +100,7 @@ if(isset($_POST['logout-btn'])) {
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                         <button class="btn-dark my-2 my-sm-0 btn-lg" name='logout-btn'>
                 <?php echo '@'.$_COOKIE['username']?>
+                <?php echo $tierhtml?>
             </button>	
             </form>
 			<?php else: ?>

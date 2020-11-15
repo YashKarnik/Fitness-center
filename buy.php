@@ -24,13 +24,42 @@ $result_temp = mysqli_query($conn,$query_temp);
 $post_temp = mysqli_fetch_all($result_temp,MYSQLI_ASSOC)[0];
 $address = $post_temp['address'];
 $email =$post_temp['email'];
+$tierhtml;
+$discount=1;
 
-foreach ($buyrequest as $item) {
-    $cost=$costDict[$item];
-    $query="INSERT INTO buying_details(email,item,item_cost,address) VALUES('{$email}','{$item}','{$cost}','{$address}')";
-    if(mysqli_query($conn,$query))	echo "<div class='alert alert-success mx-auto col-md-10' role='alert'>{$item} will be shipped shortly</div>";
-    else echo "<div class='alert alert-danger col-md-10 mx-auto' role='alert'>{$item} failed to deliver</div>";
+if(isset($_COOKIE['username'])) {
+	$temp=$_COOKIE['username'];
+	$query="SELECT email FROM user_details WHERE username='{$temp}'";
+	$result=mysqli_query($conn,$query);
+	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
+	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+	$result=mysqli_query($conn,$query);
+	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
+	$tierhtml='';
+    if($tier=="G") {    $tierhtml="<div class='alert alert-warning mx-auto col-md-10' role='alert'><b>GOLD </b>Membership detected!!<b>10% OFF AND FREE DELIVERY (Same Day)</b></div>";
+    $discount=1.1;
+    
+    }
+    
+    else if($tier=="S") {   $tierhtml="<div class='alert alert-secondary mx-auto col-md-10' role='alert'><b>SILVER </b>Membership detected!!<b>5% OFF AND FREE DELIVERY (Two Business Days)</b></div>";
+        $discount=1.1;
+    }
+    
+    else if($tier=="B") {   $tierhtml="<div class='alert alert-light mx-auto col-md-10' role='alert'><b>BRONZE </b>Membership detected!!<b>5% OFF your purchase</b></div>";
+        $discount=1.05;
+    }
 }
 
 
+echo $tierhtml;
+foreach ($buyrequest as $item) {
+    $cost=$costDict[$item]*$discount;
+    $cost_d=$costDict[$item]*$discount-$costDict[$item];
+    $query="INSERT INTO buying_details(email,item,item_cost,address) VALUES('{$email}','{$item}','{$cost}','{$address}')";
+    if(mysqli_query($conn,$query))	echo "<div class='alert alert-success mx-auto col-md-10' role='alert'><b>Congrats! $" .$cost_d." Saved!! on {$item}</b>.Item will be shipped shortly</div>";
+
+    else echo "<div class='alert alert-danger col-md-10 mx-auto' role='alert'>{$item} failed to deliver</div>";
+
+
+}
 ?>

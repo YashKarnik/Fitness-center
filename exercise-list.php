@@ -1,3 +1,16 @@
+<?php
+require './config/db_connect.php';
+$temp=$_COOKIE['username'];
+$query="SELECT email FROM user_details WHERE username='{$temp}'";
+$result=mysqli_query($conn,$query);
+$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
+
+$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+$result=mysqli_query($conn,$query);
+$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
+echo print_r($tier)
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/header.php') ?>
