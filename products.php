@@ -1,9 +1,11 @@
 <?php 
 if(isset($_POST['logout-btn'])) {
 	session_start();
-	header('Locaton:./landing.html');
+    setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
+    header("Refresh:0;url=landing.php");
 	session_destroy();
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -63,8 +65,7 @@ if(isset($_POST['logout-btn'])) {
             </div>
           </li>
           
-          <?php session_start()?> 
-				<?php if(isset($_SESSION['username'])):?>
+				<?php if(isset($_COOKIE['username'])):?>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold" href="./exercise-list.php">Todays Workout</a>
 					</li>
@@ -78,24 +79,29 @@ if(isset($_POST['logout-btn'])) {
 					
 					</li>
 				</ul>
-        <?php if(isset($_SESSION['username'])):?>
-          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <?php if(isset($_COOKIE['username'])):?>
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                        <button class="btn-dark my-2 my-sm-0 btn-lg" name='logout-btn'>
+                <?php echo '@'.$_COOKIE['username']?>
+            </button>	
+            </form>
+			<?php else: ?>
+            <a href="./logIn.php">
 					<button class="btn-dark my-2 my-sm-0 btn-lg">
-            <?php echo '@'.$_SESSION['username']?>
-          </button>	
-        </form>
-					<?php else: ?>
-            <a href="./register.php">
-					<button class="btn-dark my-2 my-sm-0 btn-lg">
-						Sign In/Sign Up
+						Sign In
 					</button>
 				</a>
-					<?php endif ?>
+                <a href="./register.php" class='ml-3'>
+					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
+						Sign Up
+					</button>
+				</a>
+				<?php endif ?>
 			</div>
     </nav>
     <img src="./static/favicon/favicon.svg" alt="Dumbell.svg" class="dead-center bg-img" />
     
-
+    <p id='demo'></p>
 
     
     <div class="container-fluid text-center">
@@ -327,8 +333,10 @@ if(isset($_POST['logout-btn'])) {
           </div>
           <div class="modal-footer">
            
-            <button type="button" id="cost-details" class="btn btn-dark">$0</button>
-            <button type="button" class="btn btn-primary">Buy Now</button>
+            <button type="button" id="cost-details" class="btn btn-dark" >$0</button>
+          
+                <button type="button"  onclick='handleClick()' class="btn btn-primary" data-dismiss="modal">Buy Now</button>
+
           </div>
         </div>
       </div>
@@ -361,26 +369,38 @@ if(isset($_POST['logout-btn'])) {
         document.getElementById('cart-details').innerText='Cart ('+cart.length+')'
       })
     })
-    function removeEle(param) {cart.splice(cart.indexOf(param), 1) ; updateModalBody() ;}
-    // cart=cart.filter(e=>e!=param)
+    function removeEle(param) {cart.splice(cart.indexOf(param), 1) ;console.log(cart);document.getElementById('cart-details').innerText='Cart ('+cart.length+')';updateModalBody() ;}
+    
     function updateModalBody(){
+      localStorage.setItem('cart',cart.toString()) 
       if(cart.length==0)
-      document.querySelector('.modal-body').innerText="Cart Empty"
+      {document.querySelector('.modal-body').innerText="Cart Empty"
+      document.querySelector('#cost-details').innerText='Total=$0'}
       else 
       {
         cost=0
         htmlstr=''
+        console.log(cart)
         cart.forEach(e=>{
           cost+=costDict[e]
           htmlstr+=`<p class='m-0 p-0'>${e} @ $${costDict[e]}<button onclick='removeEle("${e}")' data-element-name='${e}'class='close float-right remove-element-btn'>&times;</button></p></br>`
         })
-        localStorage.setItem('cart',cart.toString()) 
+        // localStorage.setItem('cart',cart.toString()) 
         document.querySelector('.modal-body').innerHTML=htmlstr
         document.querySelector('#cost-details').innerText='Total=$'+cost
         
       }
     
     }
+   function handleClick(param) { 
+       var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        document.getElementById("demo").innerHTML = xhttp.responseText;
+        console.log(xhttp.response)
+      }
+    xhttp.open('GET','buy.php?x='+cart.join(','),true)
+    xhttp.send()
+    }
   </script>
 </html>
-

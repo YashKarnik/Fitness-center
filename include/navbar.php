@@ -1,7 +1,10 @@
 <?php 
 if(isset($_POST['logout-btn'])) {
 	session_start();
-	header('Locaton:./landing.php');
+	
+		setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
+		header("Refresh:0;url=landing.php");
+
 	session_destroy();
 }
 
@@ -49,12 +52,11 @@ if(isset($_POST['logout-btn'])) {
               
             </div>
 		  </li>
-		  <?php session_start()?> 
-				<?php if(isset($_SESSION['username'])):?>
+				<?php if(isset($_COOKIE['username'])):?>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold" href="./exercise-list.php">Todays Workout</a>
 					</li>
-					<?php endif ?>
+				<?php endif ?>
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold" id='cart-details' href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart (0)</a>
 					</li>
@@ -65,18 +67,22 @@ if(isset($_POST['logout-btn'])) {
 					</li>
 				</ul>
 				
-				<?php if(isset($_SESSION['username'])):?>
+				<?php if(isset($_COOKIE['username'])):?>
 					<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 					<button name='logout-btn' type='submit' class="btn-dark my-2 my-sm-0 btn-lg">
-						<?php echo '@'.$_SESSION['username']?>
+						<?php echo '@'.$_COOKIE['username']?>
 					</button>
 					</form>
 					
 					<?php else: ?>
-						<a href="./register.php">
-					
+						<a href="./logIn.php">
 					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
-						Sign In/Sign Up
+						Sign In
+					</button>
+				</a>
+						<a href="./register.php" class='ml-3'>
+					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
+						Sign Up
 					</button>
 				</a>
 					<?php endif ?>
@@ -101,7 +107,7 @@ if(isset($_POST['logout-btn'])) {
           </div>
           <div class="modal-footer">
            
-            <button type="button" id="cost-details" class="btn btn-dark">$0</button>
+            <button type="button" id="cost-details" class="btn btn-dark" disabled>$0</button>
             <button type="button" class="btn btn-primary">Buy Now</button>
           </div>
         </div>
@@ -109,7 +115,7 @@ if(isset($_POST['logout-btn'])) {
     </div>
 
 		<script defer>
-			let x=localStorage.getItem('cart').split(',')
+			let x=localStorage.getItem('cart') && localStorage.getItem('cart').split(',')
 			document.getElementById('cart-details').innerText='Cart ('+x.length+')'
 			document.getElementsByName("logout-btn")[0].addEventListener('click',()=>
 			localStorage.removeItem('cart')

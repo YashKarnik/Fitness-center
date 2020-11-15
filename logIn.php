@@ -7,19 +7,20 @@
 		$email=$_POST['email'];
 		$password=$_POST['password'];
 		$query = "SELECT username FROM user_details WHERE email='{$email}' AND password='{$password}'";
-		$result =mysqli_query($conn,$query);
+		$result=mysqli_query($conn,$query);
+		// echo print_r($result);
 		$posts = mysqli_fetch_all($result,MYSQLI_ASSOC);
 		$username;
-		if($result){
-			// echo print_r($posts);
+		if(mysqli_query($conn,$query) and count($posts)>0){
 			$success=TRUE;
 			if(count($posts)>0) {$username=$posts[0]['username']; 
 			session_start();
 			$_SESSION['username']=$username;
+			setcookie('username', $username, time() + (86400 * 30), "/");
 			header('Location: ./exercise-list.php');}
 		}
 		else {$error=mysqli_error($conn);
-		// echo $error;
+		echo $error;
 		};
 	}
 ?>
@@ -30,6 +31,11 @@
 	<body>
 	
 		<?php include('./include/navbar.php') ?>
+		<?php if(isset($error)): ?>
+			<div class="alert alert-danger col-md-6 text-center font-weight-bold mx-auto mt-5 mb-0" role="alert">
+ 			<h4>Error!! Invalid Email</h4>
+			</div>
+		<?php endif ?>
 		<div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
 			<h1 class="text-center">Log In</h1>
 			<form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>">

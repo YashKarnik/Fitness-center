@@ -4,7 +4,6 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no"
 		/>
-		<title>Sign Up</title>
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -26,3 +25,4 @@
 		></script>
 		<link rel="stylesheet" href="./static/css/style.css" />
 	</head>
+	<title>Fitness Center</title>

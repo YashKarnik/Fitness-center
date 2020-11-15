@@ -1,16 +1,59 @@
+<?php 
+require './config/db_connect.php';
+if(isset($_POST['email'])){
+		$success;
+		$error;
+		$error2;
+		$email=$_POST['email'];
+		$tier=strtoupper($_POST['tier'][0]);
+		$duration=$_POST['duration'];
+		if($tier=='G')	$cost=$duration*100;
+		else if($tier=='S')	$cost=$duration*50;
+		else if($tier=='B')	$cost=$duration*25;
+		$cost=$cost*1.05;
+		$query_temp = "SELECT username FROM user_details WHERE email='{$email}'";
+		$result_temp = mysqli_query($conn,$query_temp);
+		$posts_temp = mysqli_fetch_all($result_temp,MYSQLI_ASSOC);
+		if(count($posts_temp)>0) 	
+		{	
+			$query="INSERT INTO premium_membership(email,tier,duration,cost) VALUES('{$email}','{$tier}','{$duration}','{$cost}')";
+			if(mysqli_query($conn,$query))	$success=TRUE;
+			else 	$error2=mysqli_error($conn);
+		}
+		else $error=TRUE;
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 	<?php include('./include/header.php') ?>
 	<body >
 		<?php include('./include/navbar.php') ?>
+		
+		<?php if(isset($success)): ?>
+			<div class="alert alert-success col-md-6 text-center font-weight-bold mx-auto mt-5 mb-0" role="alert">
+ 			<h4>Successfully activated!</h4>
+			</div>
+		<?php endif?>
+		<?php if(isset($error)): ?>
+			<div class="alert alert-danger 	col-md-6 text-center font-weight-bold mx-auto mt-5 mb-0" role="alert">
+ 			<h4>ERROR! Invalid email</h4>
+			</div>
+		<?php endif?>
+	
+		<?php if(isset($error2)): ?>
+			<div class="alert alert-danger col-md-6 text-center font-weight-bold mx-auto mt-5 mb-0" role="alert">
+ 			<h4>Error!! Couldn't connect to database <br><?php echo $error2 ?></h4>
+			</div>
+		<?php endif ?>
 		<div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
 			<h1 class="text-center">Premium Membership</h1>
-			<form method="POST" action="/lll">
+			<form method="POST" action='<?php echo $_SERVER['PHP_SELF'];  ?>'>
 				<div class="form-row">
 					<div class="form-group col-md-12">
 						<label for="inputPassword4">Email</label>
-						<input type="email" class="form-control" id="inputPassword4" required/>
+						<input type="email" name='email' class="form-control" id="inputPassword4" required/>
 					</div>
 				</div>
 				<div class="form-group col-md-12 text-center">
@@ -51,64 +94,43 @@
 				</div>
 				<div class="form-group col-md-12 text-center">
 					<label  for="membership-duration"><h3 id="membership-duration-label">Set Duration</h3></label>
-					<input type="range" min="1" max="24" value="3" style="width: 100%;margin-bottom: 2rem;" id="membership-duration" required>
+					<input type="range" min="1" max="24" value="3" style="width: 100%;margin-bottom: 2rem;" id="membership-duration" name='duration' required>
 				</div>
 				<div class="form-row">
-					<button type="button" class="btn btn-lg btn-success mx-auto" data-toggle="modal" data-target="#premiumMembershipModal" onclick="updatePremiumMembershipModal()" >
+					<button id='activate-btn' type="submit" class="btn btn-lg btn-success mx-auto">
 						Activate
 					</button>
 				</div>
+				<p class='m-0 mt-1 p-0 text-center'>(Inclusive of all taxes)</p>
 			</form>
 		</div>
-		<div class="modal fade" id="premiumMembershipModal" tabindex="-1" aria-labelledby="premiumMembershipModal" aria-hidden="true">
-			<div class="modal-dialog">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <h5 class="modal-title-mem" id="exampleModalLabel">Membership Type</h5>
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
-				<div class="modal-body" id='modal-body-mem'>
-				  Membership Duration
-				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-dark" id="total-cost-bnt" data-dismiss="modal">Total</button>
-				  <button type="button" class="btn btn-primary">Buy now</button>
-				</div>
-			  </div>
-			</div>
-		  </div>
+		
 		  <?php include('./include/footer.php') ?>
 	</body>
 	<script>
 		let radiobtn = document.getElementsByName('tier');
 		let tierCost = document.getElementById('tier-cost');
 		let membershipDuration = document.getElementById('membership-duration');
-		let totalCostBnt = document.getElementById('total-cost-bnt');
 		let mebershimpDurationLabel = document.getElementById('membership-duration-label');
-		let type=''
+		let activateBtn = document.getElementById('activate-btn');
+		let totalCost=0
 		let dur=0
 		let costdict= {'gold':100,'silver':50,'bronze':25}
 		radiobtn.forEach(element => {
 			element.addEventListener('input', e => {
-				console.log(e.target.id);
 				let x = e.target.id;
-				type=x
-				let cost = 0;
-				if (x == 'gold') cost = 100;
-				else if (x == 'silver') cost = 50;
-				else if (x == 'bronze') cost = 25;
-
+				cost=costdict[x]
 				tierCost.innerText =
 					x.charAt(0).toUpperCase() + x.slice(1) + ` ($${cost}/month)`;
+				totalCost=dur*cost*1.05
+				activateBtn.innerText=`($${totalCost}) Activate`
 			});
 		});
-		membershipDuration.addEventListener('input',(e)=>{mebershimpDurationLabel.innerText=e.target.value+' Months';dur=e.target.value})
-		function updatePremiumMembershipModal() { 
-			document.querySelector('.modal-title-mem').innerText=type?`TIER: ${type.toUpperCase()}`:'Select Memebership type'
-			document.querySelector('#modal-body-mem').innerText=`DURATION: ${dur} Monthts`
-			document.querySelector('#total-cost-bnt').innerText=(!isNaN(costdict[type]*dur))?'Total=$'+costdict[type]*dur:'Total=$'+0
-		 }
+		membershipDuration.addEventListener('input',(e)=>{
+			mebershimpDurationLabel.innerText=e.target.value+' Months';
+			dur=e.target.value
+			totalCost=dur*cost*1.05
+			activateBtn.innerText=`($${totalCost}) Activate`
+		})
 	</script>
 </html>
