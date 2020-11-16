@@ -13,9 +13,11 @@ if(isset($_COOKIE['username'])) {
 	$query="SELECT email FROM user_details WHERE username='{$temp}'";
 	$result=mysqli_query($conn,$query);
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
-	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+  $query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+  
 	$result=mysqli_query($conn,$query);
-	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
+  $temp2=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
 	$tierhtml='';
 	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
@@ -76,8 +78,10 @@ if(isset($_COOKIE['username'])) {
               <b>Articles</b>
             </a>
             <div class="dropdown-menu bg-danger" style="border: none;" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Men</a>
-              <a class="dropdown-item" href="#">Women</a>
+            <a class="dropdown-item" href="./deadlift.php">Deadlift</a>
+              <a class="dropdown-item" href="#">Squat</a>
+              <a class="dropdown-item" href="#">Benchpress</a>
+              <a class="dropdown-item" href="#">Curls</a>
               
             </div>
           </li>

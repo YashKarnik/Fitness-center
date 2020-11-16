@@ -16,7 +16,8 @@ if(isset($_POST['email'])){
 		$posts_temp = mysqli_fetch_all($result_temp,MYSQLI_ASSOC);
 		if(count($posts_temp)>0) 	
 		{	
-			$query="INSERT INTO premium_membership(email,tier,duration,cost) VALUES('{$email}','{$tier}','{$duration}','{$cost}')";
+			$query="INSERT INTO premium_membership(email,tier,duration,cost,date_expiry) VALUES('{$email}','{$tier}','{$duration}','{$cost}',DATE_ADD(CURRENT_TIMESTAMP, INTERVAL {$duration} MONTH))";
+			// echo $query;
 			if(mysqli_query($conn,$query))	$success=TRUE;
 			else 	$error2=mysqli_error($conn);
 		}

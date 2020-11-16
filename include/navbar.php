@@ -17,7 +17,10 @@ if(isset($_COOKIE['username'])) {
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
 	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
 	$result=mysqli_query($conn,$query);
-	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
+
+	$temp2=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
+	
 	$tierhtml='';
 	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
@@ -65,8 +68,11 @@ if(isset($_COOKIE['username'])) {
               <b>Articles</b>
             </a>
             <div class="dropdown-menu bg-danger" style="border: none;" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Men</a>
-              <a class="dropdown-item" href="#">Women</a>
+              <a class="dropdown-item" href="./deadlift.php">Deadlift</a>
+              <a class="dropdown-item" href="./squat.php">Squat</a>
+              <a class="dropdown-item" href="./benchpress.php">Benchpress</a>
+              <a class="dropdown-item" href="curls.php">Curls</a>
+             
               
             </div>
 		  </li>
@@ -127,7 +133,7 @@ if(isset($_COOKIE['username'])) {
           <div class="modal-footer">
            
             <button type="button" id="cost-details" class="btn btn-dark" disabled>$0</button>
-            <button type="button" class="btn btn-primary">Buy Now</button>
+            <button type="button" class="btn btn-primary" disabled>Buy Now</button>
           </div>
         </div>
       </div>
@@ -167,7 +173,7 @@ if(isset($_COOKIE['username'])) {
         htmlstr=''
         cart.forEach(e=>{
           cost+=costDict[e]
-          htmlstr+=`<p class='m-0 p-0'>${e} @ $${costDict[e]}<button onclick='removeEle("${e}")' data-element-name='${e}'class='close float-right remove-element-btn'>&times;</button></p></br>`
+          htmlstr+=`<p class='m-0 p-0'>${e} @ $${costDict[e]}<button onclick='removeEle("${e}")' data-element-name='${e}'class='close float-right remove-element-btn' disabled>&times;</button></p></br>`
         })
         localStorage.setItem('cart',cart.toString()) 
         document.querySelector('.modal-body').innerHTML=htmlstr

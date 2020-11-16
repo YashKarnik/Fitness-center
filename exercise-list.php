@@ -7,40 +7,44 @@ $email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
 
 $query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
 $result=mysqli_query($conn,$query);
-$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
-echo print_r($tier)
-?>
+$temp2=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
+// echo print_r($tier)
+$tierhtml1;
 
+  if($tier=="G") $tierhtml1='<h3 data-id="'.$tier.'" class="tier-info text-warning text-center m-3 p-0">Gold Tier <img src="./static/svgs/gold-medal.svg" width="40" height="40" alt="" loading="lazy"/></h3>';
+
+  else if($tier=="S") $tierhtml1='<h3 data-id="'.$tier.'" class="tier-info text-secondary text-center m-0 p-0">Silver Tier <img src="./static/svgs/silver-medal.svg" width="40" height="40" alt="" loading="lazy"/></h3>';
+  
+	else if($tier=="B") $tierhtml1='<h3 data-id="'.$tier.'" style="color:#96720f;"class="tier-info text-center m-0 p-0">Bronze Tier <img src="./static/svgs/bronze-medal.svg" width="40" height="40" alt="" loading="lazy"/></h3>';
+
+  // echo htmlentities($tierhtml)
+?>
+<!-- &#10003; -->
 <!DOCTYPE html>
 <html lang="en">
-<?php include('./include/header.php') ?>
+  <?php include('./include/header.php') ?>
 	<body>
-	<?php include('./include/navbar.php') ?>
-	<div class="container mt-5 rounded-lg">
-        <h2 class="text-white text-center" id='table-label'></h2>
-        <table class="table text-white text-center bg-dark ">
-            <thead  class='thread-dark' >
-              <tr>
-                  <th scope="col">Exercise</th>
-                  <th scope="col">Reps &times; Sets</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-            
-            </tbody>
-          </table>
-	</div>
-	<?php include('./include/footer.php') ?>
+    <?php include('./include/navbar.php') ?>
+    <div class="container mt-5 rounded-lg">
+      <h2 class="text-white text-center" id="table-label">
+        
+      </h2>
+      
+      <?php echo $tierhtml1 ?>
+     
+      <?php if($tier=='G') include('gold-exercises.php');
+      else if($tier=='S') include('silver-exercises.php');
+      else if($tier=='B') include('bronze-exercises.php');
+      else include('no-tier-exercises.php')
+      ?>
+  <p id="calories-burnt" class="text-right text-white"></p>
+        
+        </div>
+        <?php include('./include/footer.php') ?>
 	</body>
 	<script>
+      let tierHeading=document.querySelector(".tier-info").getAttribute('data-id');
         let d = new Date
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let date=d.getDate()
@@ -48,6 +52,6 @@ echo print_r($tier)
         let year=d.getFullYear()
         let day = days[d.getDay()]
         document.querySelector('#table-label').innerText=`Today's workout ${day}-${date}/${month}/${year}`
-		
+if(tierHeading=="G") document.getElementById("calories-burnt").innerHTML= '<h3>1000 Calories Burnt!</h3>'
 	</script>
 </html>

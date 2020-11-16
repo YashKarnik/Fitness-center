@@ -20,6 +20,7 @@ CREATE TABLE premium_membership(
    duration INT NOT NULL,
    cost INT NOT NULL,
    date_created DATETIME DEFAULT CURRENT_TIMESTAMP 
+   date_expiry DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
 CREATE TABLE buying_details(
@@ -33,3 +34,4 @@ CREATE TABLE buying_details(
 
 -- SELECT tier FROM premium_membership WHERE email='yashkarnik2000@gmail.com' ORDER BY date_created DESC LIMIT 1
 
+-- SELECT  DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 10 MONTH)
