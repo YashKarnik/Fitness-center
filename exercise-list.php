@@ -39,6 +39,7 @@ $tierhtml1;
       else include('no-tier-exercises.php')
       ?>
   <p id="calories-burnt" class="text-right text-white"></p>
+  <p id="congrats-txt" class="display-2 text-center text-white"></p>
         
         </div>
         <?php include('./include/footer.php') ?>
@@ -52,6 +53,28 @@ $tierhtml1;
         let year=d.getFullYear()
         let day = days[d.getDay()]
         document.querySelector('#table-label').innerText=`Today's workout ${day}-${date}/${month}/${year}`
-if(tierHeading=="G") document.getElementById("calories-burnt").innerHTML= '<h3>1000 Calories Burnt!</h3>'
+
+
+let exerciseList=document.querySelectorAll(".exercise-list")
+  let len=4
+exerciseList.forEach(element=>{
+  let x=element.children[3].children[0] //anchor tags
+  let y=element // parent of x
+  console.log({x,y})
+  x.addEventListener('click',e=>{
+    y.remove();
+    len-=1
+    console.log(len)
+    if(len==0) {
+      document.getElementsByClassName('thread-dark')[0].remove()
+      document.getElementsByClassName('workout-type')[0].remove()
+      document.getElementById('congrats-txt').innerHTML='CONGRATULATIONS!!'
+      if(tierHeading=="G") {document.getElementById("calories-burnt").innerHTML= '<h3>1000 Calories Burnt!</h3>'}
+    }
+  })
+  
+  })
+
+
 	</script>
 </html>

@@ -1,7 +1,7 @@
 <?php
 
 echo '<table class="table text-white text-center bg-dark ">
-<h3 class="text-white display-4">&diams; Cardio</h3>
+<h3 class="text-white display-4 workout-type">&diams; Cardio</h3>
     <thead  class="thread-dark" >
       <tr>
           <th scope="col">Exercise</th>
