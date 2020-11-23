@@ -12,8 +12,8 @@ include ('./change_username.php');
 if(isset($_POST['current_password']))
  changePassword($_POST['current_password'],$_POST['new_password'],$_COOKIE['username']);
 
-if(isset($_POST['new_username']))
- changeUsername($_COOKIE['username'],$_POST['new_username']);
+// if(isset($_POST['new_username']))
+//  changeUsername($_COOKIE['username'],$_POST['new_username']);
 
 if(isset($_POST['logout_sure_btn']))
 {
@@ -38,13 +38,16 @@ if(isset($_POST['logout_sure_btn']))
 			
 			<div class="col">
 				<div class="row p-3">
-				<button id='change-username-btn' class='col-12 btn btn-secondary mb-2'>Change Username</button>
-				<form  class='col-12' style='display:none;' action="<?php $_SERVER['PHP_SELF'] ?>" method="post" id='email-form'>
+				<button id='change-username-btn' class='col-12 btn btn-secondary mb-2'>About Us</button>
+				<!-- <form  class='col-12' style='display:none;' action="<?php $_SERVER['PHP_SELF'] ?>" method="post" id='email-form'>
 				<div class="form-group row text-center">
 					<input type="text" name='new_username' class='form-control col-12 my-2' placeholder='Enter new username' required>
 					<input type="submit" class='btn btn-warning col-12 my-2' >
 				</div>
-				</form>
+				</form> -->
+				<p style='display:none;' id="email-form">
+				Uash
+				</p>
 				</div>
 			</div>
 			
@@ -54,14 +57,13 @@ if(isset($_POST['logout_sure_btn']))
 <script>
 let changePasswordBtn = document.querySelector('#change-password-btn')
 let changeUsernameBtn = document.querySelector('#change-username-btn')
-let changeLogoutBtn = document.querySelector('#change-logout-btn')
-let flags={passwordFlag:true,usernameFlag:true,logoutFlag:true}
+let flags={passwordFlag:true,usernameFlag:true}
 // console.log(flags.Passwordflag)
 changePasswordBtn.addEventListener('click',e=>{document.querySelector('#password-form').style.display=flags.passwordFlag?'none':'block';flags.passwordFlag=!flags.passwordFlag})
 
 changeUsernameBtn.addEventListener('click',e=>{document.querySelector('#email-form').style.display=flags.usernameFlag?'none':'block';flags.usernameFlag=!flags.usernameFlag})
 
-changeLogoutBtn.addEventListener('click',e=>{document.querySelector('#logout-form').style.display=flags.logoutFlag?'none':'block';flags.logoutFlag=!flags.logoutFlag})
+
 
 
 </script>
