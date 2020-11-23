@@ -1,22 +1,22 @@
 <?php 
 require './config/db_connect.php';
-require './get_usename.php';
 if(isset($_POST['logout-btn'])) {
 	session_start();
 	
 		setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
-		setcookie('email', '', time() + (86400 * 30),'/'); // empty value and old timestamp
 		header("Refresh:0;url=index.php");
 
 	session_destroy();
 }
-$username = getUsername();
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
 	$query="SELECT email FROM user_details WHERE username='{$temp}'";
 	$result=mysqli_query($conn,$query);
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
+	// $email = mysqli_fetch_all($result,MYSQLI_ASSOC);
+	// echo print_r($email);
+
 	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
 	$result=mysqli_query($conn,$query);
 
@@ -27,11 +27,7 @@ if(isset($_COOKIE['username'])) {
 	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="B") $tierhtml='	<img src="./static/svgs/bronze-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
-}
-
-
-
-?>
+}?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
 			<a class="navbar-brand" href="#">
@@ -78,45 +74,47 @@ if(isset($_COOKIE['username'])) {
               
             </div>
 		  </li>
-				<?php if(isset($_COOKIE['username'])):?>
-					<li class="nav-item">
+				<?php if(isset($_COOKIE['username']))
+					echo '<li class="nav-item">
 						<a class="nav-link font-weight-bold" href="./exercise-list.php">Todays Workout</a>
-					</li>
-				<?php endif ?>
-					<li class="nav-item">
-						<a class="nav-link font-weight-bold" id='cart-details' href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart (0)</a>
-					</li>
-					
+					</li>';
+				 
+					echo '<li class="nav-item">
+						<a class="nav-link font-weight-bold" id="cart-details" href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart (0)</a></li>
 					
 					</li>
-				</ul>
+				</ul>';
 				
-				<?php if(isset($_COOKIE['username'])):?>
-					
-                    <a href="./settings.php" class="mr-3">
-					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
-                    <?php echo '@'.$_COOKIE['username']?>
-						<?php echo $tierhtml ?>
+				 if(isset($_COOKIE['username']))
+				 
+					echo '<a href="settings.php">
+					<button  type="submit" class="btn-dark my-2 my-sm-0 btn-lg">
+						@'.$_COOKIE['username'].
+						 $tierhtml.'
 					</button>
-				    </a>
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-					<button name='logout-btn' type='submit' class="btn-dark my-2 my-sm-0 btn-lg">
-						Logout
-					</button>
-					</form>
+					</a>';
 					
-					<?php else: ?>
-						<a href="./logIn.php">
+					else
+					echo '<a href="./logIn.php">
 					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
 						Sign In
 					</button>
 				</a>
-						<a href="./register.php" class='ml-3'>
+						<a href="./register.php" class="ml-3">
 					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
 						Sign Up
 					</button>
-				</a>
-					<?php endif ?>
+				</a>';
+				if(isset($_COOKIE['username']))
+				echo '<form action='.$_SERVER["PHP_SELF"].'method="post" class="">
+					<button name="logout-btn" type="submit" class="btn-dark my-2 my-sm-0 btn-lg ml-3">
+						Logout
+					</button>
+					</form>';
+
+
+				?>
+					
 			</div>
     </nav>
 		<img

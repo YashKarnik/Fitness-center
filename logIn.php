@@ -6,7 +6,7 @@
 		$success;
 		$email=$_POST['email'];
 		$password=$_POST['password'];
-		$query = "SELECT username FROM user_details WHERE email='{$email}' AND password='{$password}'";
+		$query = "SELECT username,email FROM user_details WHERE email='{$email}' AND password='{$password}'";
 		$result=mysqli_query($conn,$query);
 		// echo print_r($result);
 		$posts = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -15,9 +15,12 @@
 			$success=TRUE;
 			if(count($posts)>0) {$username=$posts[0]['username']; 
 			session_start();
-			$_SESSION['username']=$username;
+			// $_SESSION['username']=$username;
 			setcookie('username', $username, time() + (86400 * 30), "/");
-			header('Location: ./exercise-list.php');}
+			setcookie('email', $posts[0]['email'], time() + (86400 * 30), "/");
+			header('Location: ./exercise-list.php');
+				session_destroy();
+		}
 		}
 		else {$error=mysqli_error($conn);
 		echo $error;

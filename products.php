@@ -1,12 +1,12 @@
 <?php 
 require './config/db_connect.php';
 
-if(isset($_POST['logout-btn'])) {
-	session_start();
-    setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
-    header("Refresh:0;url=landing.php");
-	session_destroy();
-}
+// if(isset($_POST['logout-btn'])) {
+// 	session_start();
+//     setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
+//     header("Refresh:0;url=landing.php");
+// 	session_destroy();
+// }
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
@@ -63,7 +63,7 @@ if(isset($_COOKIE['username'])) {
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="./landing.php"><b>Fitness Center</b></a>
+				<a class="navbar-brand" href="./index.php"><b>Fitness Center</b></a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item ">
 						<a class="nav-link font-weight-bold" href="./mform.php"
@@ -94,19 +94,23 @@ if(isset($_COOKIE['username'])) {
 					<li class="nav-item">
 						<a class="nav-link font-weight-bold" id='cart-details' href="" data-toggle="modal" data-target="#exampleModal" onclick="updateModalBody()">Cart</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link font-weight-bold" href="#">About Us</a>
-					</li>
+				
 					
 					</li>
 				</ul>
         <?php if(isset($_COOKIE['username'])):?>
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                        <button class="btn-dark my-2 my-sm-0 btn-lg" name='logout-btn'>
-                <?php echo '@'.$_COOKIE['username']?>
-                <?php echo $tierhtml?>
-            </button>	
-            </form>
+            	
+          <a href="./settings.php" class="mr-3">
+					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
+                    <?php echo '@'.$_COOKIE['username']?>
+						<?php echo $tierhtml ?>
+					</button>
+				    </a>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+					<button name='logout-btn' type='submit' class="btn-dark my-2 my-sm-0 btn-lg">
+						Logout
+					</button>
+					</form>
 			<?php else: ?>
             <a href="./logIn.php">
 					<button class="btn-dark my-2 my-sm-0 btn-lg">
