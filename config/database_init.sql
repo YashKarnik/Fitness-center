@@ -19,7 +19,7 @@ CREATE TABLE premium_membership(
    tier varchar(1) NOT NULL,
    duration INT NOT NULL,
    cost INT NOT NULL,
-   date_created DATETIME DEFAULT CURRENT_TIMESTAMP 
+   date_created DATETIME DEFAULT CURRENT_TIMESTAMP, 
    date_expiry DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
