@@ -18,7 +18,7 @@ $costDict = array(
 "Mass Gainers (Gold)"=>300);
 
 session_start();
-$username=$_SESSION['username'];
+$username=$_COOKIE['username'];
 $query_temp = "SELECT email,address FROM user_details WHERE username='{$username}'";
 $result_temp = mysqli_query($conn,$query_temp);
 $post_temp = mysqli_fetch_all($result_temp,MYSQLI_ASSOC)[0];

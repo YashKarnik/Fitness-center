@@ -10,7 +10,7 @@ $result=mysqli_query($conn,$query);
 $temp2=mysqli_fetch_all($result,MYSQLI_ASSOC);
 	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
 // echo print_r($tier)
-$tierhtml1;
+$tierhtml1='';
 
   if($tier=="G") $tierhtml1='<h3 data-id="'.$tier.'" class="tier-info text-warning text-center m-3 p-0">Gold Tier <img src="./static/svgs/gold-medal.svg" width="40" height="40" alt="" loading="lazy"/></h3>';
 
@@ -45,7 +45,6 @@ $tierhtml1;
         <?php include('./include/footer.php') ?>
 	</body>
 	<script>
-      let tierHeading=document.querySelector(".tier-info").getAttribute('data-id');
         let d = new Date
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let date=d.getDate()
@@ -53,7 +52,8 @@ $tierhtml1;
         let year=d.getFullYear()
         let day = days[d.getDay()]
         document.querySelector('#table-label').innerText=`Today's workout ${day}-${date}/${month}/${year}`
-
+        
+       
 
 let exerciseList=document.querySelectorAll(".exercise-list")
   let len=4
@@ -69,6 +69,7 @@ exerciseList.forEach(element=>{
       document.getElementsByClassName('thread-dark')[0].remove()
       document.getElementsByClassName('workout-type')[0].remove()
       document.getElementById('congrats-txt').innerHTML='CONGRATULATIONS!!'
+      let tierHeading=document.querySelector(".tier-info").getAttribute('data-id');
       if(tierHeading=="G") {document.getElementById("calories-burnt").innerHTML= '<h3>1000 Calories Burnt!</h3>'}
     }
   })

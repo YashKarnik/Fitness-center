@@ -56,7 +56,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="inputEmail4">Username</label>
-						<input type="name" class="form-control" id="inputEmail4" name='username' required />
+						<input type="name" class="form-control" id="inputEmail4" name='username' maxlength="10" required  />
 					</div>
 					<div class="form-group col-md-6">
 						<label for="inputPassword4">Email</label>

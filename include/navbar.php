@@ -94,9 +94,9 @@ if(isset($_COOKIE['username'])) {
 				<?php if(isset($_COOKIE['username'])):?>
 					
                     <a href="./settings.php" class="mr-3">
-					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
-                    <?php echo '@'.$_COOKIE['username']?>
-						<?php echo $tierhtml ?>
+					<button class="btn btn-dark my-2 my-md-2 btn-lg">
+					<?php echo $tierhtml ?>
+                    <?php echo '@'.substr($_COOKIE['username'],0,9)."..."?>
 					</button>
 				    </a>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">

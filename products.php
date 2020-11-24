@@ -1,12 +1,12 @@
 <?php 
 require './config/db_connect.php';
 
-// if(isset($_POST['logout-btn'])) {
-// 	session_start();
-//     setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
-//     header("Refresh:0;url=landing.php");
-// 	session_destroy();
-// }
+if(isset($_POST['logout-btn'])) {
+	session_start();
+    setcookie('username', '', time() + (86400 * 30),'/'); // empty value and old timestamp
+    header("Refresh:0;url=index.php");
+	session_destroy();
+}
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
@@ -102,8 +102,8 @@ if(isset($_COOKIE['username'])) {
             	
           <a href="./settings.php" class="mr-3">
 					<button class="btn btn-dark my-2 my-sm-0 btn-lg">
-                    <?php echo '@'.$_COOKIE['username']?>
 						<?php echo $tierhtml ?>
+            <?php echo '@'.substr($_COOKIE['username'],0,9)."..."?>
 					</button>
 				    </a>
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
