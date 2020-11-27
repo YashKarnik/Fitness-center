@@ -1,6 +1,6 @@
 <?php 
 require './config/db_connect.php';
-require './get_usename.php';
+// require './get_usename.php';
 if(isset($_POST['logout-btn'])) {
 	session_start();
 	
@@ -10,19 +10,20 @@ if(isset($_POST['logout-btn'])) {
 
 	session_destroy();
 }
-$username = getUsername();
+$username = $_COOKIE['username'];
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
 	$query="SELECT email FROM user_details WHERE username='{$temp}'";
 	$result=mysqli_query($conn,$query);
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
-	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
+	$query="SELECT tier,date_expiry	 FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
 	$result=mysqli_query($conn,$query);
 
 	$temp2=mysqli_fetch_all($result,MYSQLI_ASSOC);
 	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
-	
+	$date_expiry =(isset($temp2[0]['date_expiry'])) ? $temp2[0]['date_expiry']: '';
+	// echo $date_expiry;
 	$tierhtml='';
 	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
