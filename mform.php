@@ -36,6 +36,7 @@ if(isset($_POST['email'])){
 <html lang="en">
 
 	<?php include('./include/header.php') ?>
+	<title>Premium Membership</title>
 	<body >
 		<?php include('./include/navbar.php'); 
 		

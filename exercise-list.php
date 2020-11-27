@@ -24,6 +24,7 @@ $tierhtml1='';
 <!DOCTYPE html>
 <html lang="en">
   <?php include('./include/header.php') ?>
+  <title>Todays Workout</title>
 	<body>
     <?php include('./include/navbar.php') ?>
     <div class="container mt-5 rounded-lg">

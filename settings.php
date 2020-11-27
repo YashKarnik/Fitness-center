@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/header.php') ?>
+<title>Settings</title>
 
 
 </style>

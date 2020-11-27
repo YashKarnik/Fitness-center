@@ -31,6 +31,7 @@ if(isset($_COOKIE['username'])) {
 <html lang="en">
   
   <?php include('./include/header.php') ?>
+  <title>Products</title>
   <style>
     .card {
       margin:1rem auto 1rem auto;

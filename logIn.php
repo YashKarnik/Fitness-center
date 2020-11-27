@@ -31,6 +31,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php include('./include/header.php') ?> 
+	<title>Login</title>
 	<body>
 	
 		<?php include('./include/navbar.php') ?>

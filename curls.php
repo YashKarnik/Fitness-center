@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <?php  include('./include/header.php') ?>
+<title>Curls</title>
 </head>
 <body>
 <?php  include('./include/navbar.php') ?>

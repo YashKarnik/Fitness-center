@@ -25,4 +25,3 @@
 		></script>
 		<link rel="stylesheet" href="./static/css/style.css" />
 	</head>
-	<title>Fitness Center</title>

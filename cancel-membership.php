@@ -17,6 +17,7 @@ $query="DELETE FROM premium_membership WHERE email='{$email}'";
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/header.php') ?>
+<title>Cancel Membership</title>
 <body>
 <?php include('./include/navbar.php'); ?>
 <div class="container  bg-danger mt-5 p-0 rounded-sm p-4">

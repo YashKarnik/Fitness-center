@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/header.php') ?>
+	<title>Fitness Center</title>
 	<body>
 	<?php include('./include/navbar.php') ?>
 <div class="container-fuild">
