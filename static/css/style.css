@@ -37,6 +37,7 @@ nav {
 	background-color: #fff;
 	padding: 2rem;
 	border-top: 10px solid red;
+	border-bottom: 10px solid red;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }

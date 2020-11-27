@@ -9,7 +9,7 @@
 		<div class="col-lg-8 text-center p-5">
 			<div class="card mb-5">
 				<div class="card-header">
-				  Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, animi.
+				  This company helped me loose a ton of excess weight 
 				</div>
 				<div class="card-body">
 				  <blockquote class="blockquote mb-0">
@@ -19,7 +19,7 @@
 			</div>			  
 			<div class="card mb-5">
 				<div class="card-header">
-				  Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, animi.
+				  Helped me acheive my fitness goals. Great Service and supplements 
 				</div>
 				<div class="card-body">
 				  <blockquote class="blockquote mb-0">
@@ -64,8 +64,8 @@
 </div>
 <div class="footer">
 			<div class="text-center"><img src="./static/images/products-images/whey_protein_generic.jpg" alt="" srcset=""></div>
-			<div><p class="display-3 text-left" >Tested.Trusted</p>
-				<p class="display-4 text-left text-danger" >Truth in every bottle</p>
+			<div><p class="display-3 text-left" >Tested.Trusted.</p>
+				<p class="display-4 text-left text-danger" >Truth in every bottle.</p>
 				<div id="supplement-review">
 					<img src="./static/svgs/Left_square_bracket.svg" id="supplement-review-bracket-left" alt="" srcset="">
 					<img src="./static/svgs/Left_square_bracket.svg" id="supplement-review-bracket-right" alt="" srcset="">
@@ -74,9 +74,73 @@
 				</div>
 			</div>
 	</div>
-		<?php include('./include/footer.php') ?>
+		<?php //include('./include/footer.php') ?>
+
+<h1 class="text-center display-2 text-white mb-4">Premium Memberships</h1>
+<div class="container">
+<div class="row">
+	<div class="col-md-4">
+		<div class="card mb-5 bg-warning" style="height:85%;">
+						<div class="card-header display-4 text-center" style="background-color:#c49102;">
+						<img src="./static/svgs/gold-medal.svg" width="60" height="60" alt="" loading="lazy"/>
+						Gold
+						</div>
+						<div class="card-body">
+						<blockquote >
+							<footer >
+							<ul>
+							<li>Same day delivery</li>
+							<li>10% Discount on all products</li>
+							<li>Customized workout(Weights)</li>
+							<li>Calorie counter</li>
+							</ul>
+							</footer>
+						</blockquote>
+						</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card mb-5 bg-light" style="height:85%" >
+						<div class="card-header display-4 text-center" style="background-color:gray;">
+						<img src="./static/svgs/silver-medal.svg" width="60" height="60" alt="" loading="lazy"/>Silver
+						</div>
+						<div class="card-body">
+						<blockquote class="mb-0">
+							<footer>
+							<ul>
+							<li>Same day delivery</li>
+							<li>10% Discount on all products</li>
+							<li>Customized workout(Weights)</li>
+							</ul>
+							 </footer>
+						</blockquote>
+						</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card mb-5" style="background-color:#a97142;height:85%">
+						<div class="card-header display-4 text-center" style="background-color:brown;">
+						<img src="./static/svgs/bronze-medal.svg" width="60" height="60" alt="" loading="lazy"/>Bronze
+						</div>
+						<div class="card-body">
+						<blockquote class=" mb-0">
+							<footer >
+							<ul>
+							<li>Delivery within two business days</li>
+							<li>5% Discount on all products</li>
+							<li>Customized workout(Cardio)</li>
+							</ul>
+							</footer>
+						</blockquote>
+						</div>
+		</div>
+	</div>
+</div>
 
 
+</div>
+<?php include("./include/footer.php") ?>
+</body>
 	<script>
 		let height= document.getElementById('height')
 		let weight= document.getElementById('weight')
@@ -100,7 +164,6 @@
 	 }
 
 	</script>	
-</body>
 </html>
 
 
