@@ -10,7 +10,7 @@ if(isset($_POST['logout-btn'])) {
 
 	session_destroy();
 }
-$username = $_COOKIE['username'];
+$username = isset($_COOKIE['username']) ? $_COOKIE['username']:'';
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
