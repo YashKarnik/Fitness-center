@@ -7,7 +7,7 @@ require './config/db_connect.php';
 
 
 
-if(isset($_POST['email'])){
+if(isset($_POST['email']) && isset($_COOKIE['username'])){
 		$success;
 		$error;
 		$error2;
@@ -30,6 +30,8 @@ if(isset($_POST['email'])){
 		}
 		else $error=TRUE;
 	}
+	else if(empty($_COOKIE['username']) && isset($_POST['email'])) $error=TRUE;
+	
 
 ?>
 <!DOCTYPE html>
