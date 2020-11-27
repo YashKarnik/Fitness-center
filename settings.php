@@ -7,11 +7,12 @@
 </style>
 <body>
 <?php include('./include/navbar.php');
+$success='';
 include ('./change_password.php');
 include ('./change_username.php');
 // echo print_r($_POST);
 if(isset($_POST['current_password']))
- changePassword($_POST['current_password'],$_POST['new_password'],$_COOKIE['username']);
+ $success=changePassword($_POST['current_password'],$_POST['new_password'],$_COOKIE['username']);
 
 // if(isset($_POST['new_username']))
 //  changeUsername($_COOKIE['username'],$_POST['new_username']);
@@ -21,6 +22,7 @@ if(isset($_POST['logout_sure_btn']))
 	echo 'LOGOUT';
 }
 ?>
+<?php echo $success?>
 <div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
 			<h1 class="text-center">@<?php echo $_COOKIE['username'] ?></h1>
 		
