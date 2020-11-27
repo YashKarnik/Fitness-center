@@ -1,5 +1,12 @@
 <?php 
 require './config/db_connect.php';
+// require './get_usename.php';
+// echo getUsername();
+
+
+
+
+
 if(isset($_POST['email'])){
 		$success;
 		$error;
@@ -30,7 +37,9 @@ if(isset($_POST['email'])){
 
 	<?php include('./include/header.php') ?>
 	<body >
-		<?php include('./include/navbar.php') ?>
+		<?php include('./include/navbar.php'); 
+		
+		?>
 		
 		<?php if(isset($success)): ?>
 			<div class="alert alert-success col-md-6 text-center font-weight-bold mx-auto mt-5 mb-0" role="alert">
@@ -49,6 +58,7 @@ if(isset($_POST['email'])){
 			</div>
 		<?php endif ?>
 		<div class="container w-50 h-50 bg-danger mt-5 p-3 rounded-sm">
+			<?php if(!$tierhtml): ?>
 			<h1 class="text-center">Premium Membership</h1>
 			<form method="POST" action='<?php echo $_SERVER['PHP_SELF'];  ?>'>
 				<div class="form-row">
@@ -98,12 +108,27 @@ if(isset($_POST['email'])){
 					<input type="range" min="1" max="24" value="3" style="width: 100%;margin-bottom: 2rem;" id="membership-duration" name='duration' required>
 				</div>
 				<div class="form-row">
-					<button id='activate-btn' type="submit" class="btn btn-lg btn-success mx-auto">
+				
+					<button id="activate-btn" type="submit" class="btn btn-lg btn-success mx-auto">
 						Activate
 					</button>
 				</div>
 				<p class='m-0 mt-1 p-0 text-center'>(Inclusive of all taxes)</p>
 			</form>
+			<?php else: ?>
+			<?php $enlargedTierSVG = $tierhtml;
+			$enlargedTierSVG=str_replace('width="20"','width="80"',$enlargedTierSVG);
+			$enlargedTierSVG=str_replace('height="20"','height="80"',$enlargedTierSVG);
+			?>
+			<p class='text-center'><?php echo $enlargedTierSVG?></p>
+			<h1 class='text-center'>Membership Already Active.<br>
+			<span><h3>Expires on <?php echo $date_expiry?></h3></span> 
+			
+			<a href="./cancel-membership.php">
+			<button class='btn btn-warning btn-lg'>Cancel?</button>
+			</a>
+			</h1>
+			<?php endif ?>
 		</div>
 		
 		  <?php include('./include/footer.php') ?>
