@@ -12,6 +12,7 @@ if(isset($_POST['logout-btn'])) {
 }
 $username = isset($_COOKIE['username']) ? $_COOKIE['username']:'';
 
+$tierhtml='';
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
 	$query="SELECT email FROM user_details WHERE username='{$temp}'";
@@ -24,7 +25,6 @@ if(isset($_COOKIE['username'])) {
 	$tier =(isset($temp2[0]['tier'])) ? $temp2[0]['tier']: '';
 	$date_expiry =(isset($temp2[0]['date_expiry'])) ? $temp2[0]['date_expiry']: '';
 	// echo $date_expiry;
-	$tierhtml='';
 	if($tier=="G") $tierhtml='	<img src="./static/svgs/gold-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="S") $tierhtml='	<img src="./static/svgs/silver-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
 	else if($tier=="B") $tierhtml='	<img src="./static/svgs/bronze-medal.svg" width="20" height="20" alt="" loading="lazy"/>';
