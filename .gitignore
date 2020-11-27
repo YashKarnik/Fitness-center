@@ -1,4 +1,5 @@
 .vscode
 db_connect_creds.php
 navbar1.php
-change_username
+change_username.php
+get_usename.php
