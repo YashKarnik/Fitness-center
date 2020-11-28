@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<h1>one</h1>
+
 <?php include('include/header.php')?>
-<h1>one</h1>
+
 	<title>Fitness Center</title>
 	<body>
-<h1>two</h1>
-	<?php include('include/navbar.php'); echo var_dump($_ENV)  ?>
-<h1>two</h1>
+
+	<?php include('include/navbar.php') ?>
+
 <div class="container-fuild">
 	<div class="row">
 		<div class="col-lg-8 text-center p-5">
