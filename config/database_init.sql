@@ -2,6 +2,7 @@
 CREATE DATABASE fitness_center
 
 -- CREATE TABLES
+-- CREATE TABLES
 CREATE TABLE user_details (
    username varchar(100) PRIMARY KEY,
    email varchar(100) UNIQUE,
