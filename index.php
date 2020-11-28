@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('include/header.php') ?>
+<?php include('include/header.php')?>
 	<title>Fitness Center</title>
 	<body>
-	<?php include('include/navbar.php') ?>
+	<?php include('include/navbar.php'); echo var_dump($_ENV)  ?>
 <div class="container-fuild">
 	<div class="row">
 		<div class="col-lg-8 text-center p-5">
