@@ -26,7 +26,7 @@
 <?php include('./include/navbar.php');
 require './config/db_connect.php';
 $prodImgRefs = array(
-	"Whey protein (Standard)"=>"./static/images/products-images/whey/whey_protein.jpg",
+	"Whey protein (Standard)"=>"./static/images/products-images/whey/whey_protien.jpg",
 	"Whey protein (Isolate)"=>"./static/images/products-images/whey/whey_protien_isolate.jpg",
 	"Whey protein (Gold)"=>"./static/images/products-images/whey/whey_protien_gold.jpg",
 	"BCAA (Standard)"=>"./static/images/products-images/bcaa/bcaa_normal.jpg",
