@@ -295,7 +295,7 @@ if(isset($_COOKIE['username'])) {
       <div class="row ">
         <div class="col-md-4 mx-auto">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_1.jpg" alt="Card image cap">
+            <img class="card-img-top" src="./static/images/products-images/mass_gainer/mass_gainer_1.jpg" alt="Card image cap">
             
             <div class="card-body">
               <h5 class="card-title">Mass Gainers (Standard)</h5>
@@ -311,7 +311,7 @@ if(isset($_COOKIE['username'])) {
         </div>
         <div class="col-md-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_2.jpg" alt="Card image cap">
+            <img class="card-img-top" src="./static/images/products-images/mass_gainer/mass_gainer_pro.jpg" alt="Card image cap">
             
             <div class="card-body">
               <h5 class="card-title">Mass Gainers (Isolate)</h5>
@@ -327,7 +327,7 @@ if(isset($_COOKIE['username'])) {
         </div>
         <div class="col-md-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./static/images/products-images/creatine/creatine_3.jpg" alt="Card image cap">
+            <img class="card-img-top" src="./static/images/products-images/mass_gainer/mass_gainer_gold.jpg" alt="Card image cap">
             
             <div class="card-body">
               <h5 class="card-title">Mass Gainers (Gold)</h5>
