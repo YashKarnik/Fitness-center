@@ -37,24 +37,24 @@ if(isset($_COOKIE['username'])) {
 	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
 	$tierhtml='';
     if($tier=="G") {    $tierhtml="<div class='alert alert-warning mx-auto col-md-10' role='alert'><b>GOLD </b>Membership detected!!<b>10% OFF AND FREE DELIVERY (Same Day)</b></div>";
-    $discount=1.1;
+    $discount=0.1;
     
     }
     
     else if($tier=="S") {   $tierhtml="<div class='alert alert-secondary mx-auto col-md-10' role='alert'><b>SILVER </b>Membership detected!!<b>5% OFF AND FREE DELIVERY (Two Business Days)</b></div>";
-        $discount=1.1;
+        $discount=0.1;
     }
     
     else if($tier=="B") {   $tierhtml="<div class='alert alert-light mx-auto col-md-10' role='alert'><b>BRONZE </b>Membership detected!!<b>5% OFF your purchase</b></div>";
-        $discount=1.05;
+        $discount=0.05;
     }
 }
 
 
 echo $tierhtml;
 foreach ($buyrequest as $item) {
-    $cost=$costDict[$item]*$discount;
-    $cost_d=$costDict[$item]*$discount-$costDict[$item];
+    $cost=$costDict[$item]*(1-$discount);
+    $cost_d=$costDict[$item]*$discount;
     $query="INSERT INTO buying_details(email,item,item_cost,address) VALUES('{$email}','{$item}','{$cost}','{$address}')";
     if(mysqli_query($conn,$query))	echo "<div class='alert alert-success mx-auto col-md-10' role='alert'><b>Congrats! $" .$cost_d." Saved!! on {$item}</b>.Item will be shipped shortly</div>";
 
