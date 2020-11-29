@@ -33,10 +33,11 @@ if(isset($_COOKIE['username'])) {
 	$result=mysqli_query($conn,$query);
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
 	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
-	$result=mysqli_query($conn,$query);
-	$tier = isset(mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'])?mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier']:'';
+    $result=mysqli_query($conn,$query);
+    $x=mysqli_fetch_all($result,MYSQLI_ASSOC);
+	$tier = isset($x[0]['tier'])?$x[0]['tier']:'';
     $tierhtml='';
-    if($tier=="G") {    $tierhtml="<div class='alert alert-warning mx-auto col-md-10' role='alert'><b>GOLD </b>Membership detected!!<b>10% OFF AND FREE DELIVERY (Same Day)</b></div>";
+    if($tier=="G") { $tierhtml="<div class='alert alert-warning mx-auto col-md-10' role='alert'><b>GOLD </b>Membership detected!!<b>10% OFF AND FREE DELIVERY (Same Day)</b></div>";
     $discount=0.1;
     
     }
