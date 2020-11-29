@@ -25,7 +25,7 @@ $post_temp = mysqli_fetch_all($result_temp,MYSQLI_ASSOC)[0];
 $address = $post_temp['address'];
 $email =$post_temp['email'];
 $tierhtml;
-$discount=1;
+$discount=0;
 
 if(isset($_COOKIE['username'])) {
 	$temp=$_COOKIE['username'];
@@ -34,8 +34,8 @@ if(isset($_COOKIE['username'])) {
 	$email = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['email'];
 	$query="SELECT tier FROM premium_membership WHERE email='{$email}' ORDER BY date_created DESC LIMIT 1";
 	$result=mysqli_query($conn,$query);
-	$tier = mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'];
-	$tierhtml='';
+	$tier = isset(mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier'])?mysqli_fetch_all($result,MYSQLI_ASSOC)[0]['tier']:'';
+    $tierhtml='';
     if($tier=="G") {    $tierhtml="<div class='alert alert-warning mx-auto col-md-10' role='alert'><b>GOLD </b>Membership detected!!<b>10% OFF AND FREE DELIVERY (Same Day)</b></div>";
     $discount=0.1;
     
@@ -53,8 +53,8 @@ if(isset($_COOKIE['username'])) {
 
 echo $tierhtml;
 foreach ($buyrequest as $item) {
-    $cost=$costDict[$item]*(1-$discount);
     $cost_d=$costDict[$item]*$discount;
+    $cost=$costDict[$item]-$cost_d;
     $query="INSERT INTO buying_details(email,item,item_cost,address) VALUES('{$email}','{$item}','{$cost}','{$address}')";
     if(mysqli_query($conn,$query))	echo "<div class='alert alert-success mx-auto col-md-10' role='alert'><b>Congrats! $" .$cost_d." Saved!! on {$item}</b>.Item will be shipped shortly</div>";
 
