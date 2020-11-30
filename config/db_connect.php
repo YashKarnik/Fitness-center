@@ -5,7 +5,4 @@ if(mysqli_connect_errno()) {
     echo 'FAIL'.mysqli_connect_errno();
     // echo mysqli_error($conn);
 }
-
-
-
 ?>

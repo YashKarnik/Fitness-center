@@ -23,5 +23,6 @@
 			crossorigin="anonymous"
 			defer
 		></script>
+		<link rel="shortcut icon" href="./static/favicon/favicon.svg" type="image/x-icon">
 		<link rel="stylesheet" href="./static/css/style.css" />
 	</head>
