@@ -1,9 +1,0 @@
-SetEnv REMOTE_HOST mysql57-bf63.euw2.cloud.ametnes.com
-SetEnv REMOTE_PASSWORD wlkED9xV8pgWJplSt5bD
-SetEnv REMOTE_DATABASE 8859041361 
-SetEnv REMOTE_USER tfiblZcsLp  
-
-SetEnv HOST db4free.net
-SetEnv PASSWORD yash_karnik
-SetEnv DATABASE yash_karnik
-SetEnv USER yash_karnik
