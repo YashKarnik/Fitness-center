@@ -1,11 +1,13 @@
 <?php
-require_once ("vendor/autoload.php");
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+require_once realpath(__DIR__."/vendor/autoload.php");
+use Dotenv\Dotenv;
+$dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 
-$host=getenv('HOST');
-$user=getenv("USER");
-$password=getenv("PASSWORD");
-$database=getenv("DATABASE");
+
+$host=$_ENV['HOST'];
+$user=$_ENV["USER"];
+$password=$_ENV["PASSWORD"];
+$database=$_ENV["DATABASE"];
 ?>
