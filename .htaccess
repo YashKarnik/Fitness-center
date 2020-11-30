@@ -1,0 +1,4 @@
+SetEnv HOST db4free.net
+SetEnv PASSWORD yash_karnik
+SetEnv DATABASE yash_karnik
+SetEnv USER yash_karnik
