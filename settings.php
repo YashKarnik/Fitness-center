@@ -69,8 +69,8 @@
 				<button id='change-password-btn' class='col-12 mb-2 btn btn-secondary'>Change Password</button>
 				<form class='col-12' style='display:none;' action="<?php $_SERVER['PHP_SELF'] ?>" method="post" id='password-form'>
 					<div class="form-group row text-center">
-						<input type="text" name='current_password' class='form-control col-12 my-2' placeholder='Enter previous password' required>
-						<input type="text" name='new_password' class='form-control col-12 my-2' placeholder='Enter new password' required>
+						<input type="password" name='current_password' class='form-control col-12 my-2' placeholder='Enter previous password' required minlength="5">
+						<input type="password" name='new_password' class='form-control col-12 my-2' placeholder='Enter new password' required minlength="5">
 						<input type="submit" class='btn btn-warning col-12 my-2'>
 					</div>
 				</form>
