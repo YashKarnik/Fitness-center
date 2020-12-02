@@ -25,4 +25,4 @@ if(isset($posts[0]['username'])) {
     
 }
 
-}?>
+}

@@ -18,4 +18,3 @@ return '<div class="alert alert-danger col-md-6 text-center font-weight-bold mx-
 <h4>Incorrect password!</h4>
 </div>';
 }
-?>
