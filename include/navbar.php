@@ -81,7 +81,12 @@ if (isset($_COOKIE['username'])) {
 			<a href="./settings.php" class="mr-3">
 				<button class="btn btn-dark my-2 my-md-2 btn-lg">
 					<?php echo $tierhtml ?>
-					<?php echo '@' . substr($_COOKIE['username'], 0, 9) . "..." ?>
+					<?php if (count($_COOKIE['username']) >= 9) : ?>
+						<?php echo '@' . substr($_COOKIE['username'], 0, 9) . "..." ?>
+					<?php else : ?>
+						<?php echo '@' . $_COOKIE['username'] ?>
+					<?php endif ?>
+
 				</button>
 			</a>
 			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
