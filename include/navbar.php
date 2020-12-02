@@ -132,7 +132,7 @@ if (isset($_COOKIE['username'])) {
 </div>
 
 <script defer>
-	let x = localStorage.getItem('cart') && localStorage.getItem('cart').split(',')
+	let x = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : []
 	document.getElementById('cart-details').innerText = 'Cart (' + x.length + ')'
 	document.getElementsByName("logout-btn")[0].addEventListener('click', () =>
 		localStorage.removeItem('cart')
