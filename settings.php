@@ -87,7 +87,7 @@
 								<div class="col-9 text-left" style="font-size:1.3rem;">
 									<b><?php echo $value['item'] ?><br></b>
 									<hr>
-									<?php echo "Purchaced on: " . $value['purchaced_on'] ?><br>
+									<?php echo "Purchased on: " . $value['purchaced_on'] ?><br>
 									<?php echo "Cost: $" . $value["item_cost"] ?>
 								</div>
 							</div>
