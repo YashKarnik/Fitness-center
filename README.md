@@ -1,3 +1,8 @@
+<p align='center'>
+  <img src='https://github.com/YashKarnik/Fitness-center/blob/master/static/favicon/favicon.png' width='20%' />
+  <h1 align='center'><a href='https://fitness-center-yash.herokuapp.com/'>Fitness Center</a></h1>
+</p>
+
 # [Fitness Center](https://fitness-center-yash.herokuapp.com/) 
 * A portal for customers to purchace supplements from a mock online store.
 * Choose between three membership tiers(Bronze, Silver, Gold). Options to cancel membership also available. 
